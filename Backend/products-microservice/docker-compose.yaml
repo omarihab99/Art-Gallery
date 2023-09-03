@@ -1,0 +1,19 @@
+services:
+  main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: php artisan serve
+    volumes:
+      - .:/products-microservice
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: productsdb
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "3306:3306"
