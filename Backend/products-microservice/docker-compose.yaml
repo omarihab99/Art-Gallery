@@ -12,8 +12,12 @@ services:
       - db
   db:
     image: mysql:8.0
+    volumes:
+      - products_data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: productsdb
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     ports:
       - "33061:3306"
+volumes:
+  products_data:
