@@ -1,6 +1,14 @@
 {
   "$schema": "https://www.krakend.io/schema/krakend.json",
   "version": 3,
+  "extra_config": {
+    "github_com/devopsfaith/krakend-cors": {
+      "allow_origins": ["*"],
+      "expose_headers": ["Content-Length"],
+      "max_age": "12h",
+      "allow_credentials": false
+    }
+  },
   "name": "KrakenD - API Gateway",
   "timeout": "3000ms",
   "cache_ttl": "300s",
@@ -23,17 +31,18 @@
       ]
     },
     {
-      "endpoint": "/",
-      "method": "GET",
+      "endpoint": "/users/login",
+      "method": "POST",
       "output_encoding": "json",
       "backend": [
         {
-          "url_pattern": "/",
+          "url_pattern": "/api/users/login",
           "encoding": "json",
           "sd": "static",
-          "method": "GET",
+          "method": "POST",
           "host": [
-            "http://0.0.0.0:8000"
+            "http://0.0.0.0:8000",
+            "http://0.0.0.0:8001"
           ],
           "disable_host_sanitize": false
         }
@@ -51,6 +60,91 @@
           "method": "GET",
           "host": [
             "http://0.0.0.0:8000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/products/{id}",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/products/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "http://0.0.0.0:8000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/products",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/products",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "http://0.0.0.0:8000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/products/{id}",
+      "method": "DELETE",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/products/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "DELETE",
+          "host": [
+            "http://0.0.0.0:8000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/products/{id}",
+      "method": "PATCH",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/products/{id}",
+          "encoding": "json",
+          "sd": "static",
+          "method": "PATCH",
+          "host": [
+            "http://0.0.0.0:8000"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/users/register",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/users/register",
+          "encoding": "json",
+          "sd": "static",
+          "method": "POST",
+          "host": [
+            "http://0.0.0.0:8001"
           ],
           "disable_host_sanitize": false
         }
