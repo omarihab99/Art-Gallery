@@ -9,6 +9,14 @@ const routes: Routes = [
   {
     path: '',
     component: HeroSectionComponent
+  },
+  {
+    path: 'shop',
+    loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
   }
 ];
 

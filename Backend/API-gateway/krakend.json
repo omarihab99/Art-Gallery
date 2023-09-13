@@ -63,7 +63,12 @@
           ],
           "disable_host_sanitize": false
         }
-      ]
+      ],
+      "extra_config": {
+        "github.com/devopsfaith/krakend/logging": {
+          "level": "DEBUG"
+        }
+      }
     },
     {
       "endpoint": "/products/{id}",

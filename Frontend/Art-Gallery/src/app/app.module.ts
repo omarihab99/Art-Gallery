@@ -9,6 +9,10 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import {ButtonModule} from 'primeng/button';
 import { HeroSectionComponent } from './hero-section/hero-section.component';
 import { FooterComponent } from './footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import {BadgeModule} from 'primeng/badge';
+import { CartService } from './cart.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,9 +26,12 @@ import { FooterComponent } from './footer/footer.component';
     ToolbarModule,
     MenubarModule,
     ScrollTopModule,
-    ButtonModule
+    ButtonModule,
+    HttpClientModule,
+    BadgeModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

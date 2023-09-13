@@ -1,0 +1,110 @@
+<div class="ng-star-inserted">
+  <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+    <div class="flex flex-column align-items-center mb-6">
+      <div class="text-900 text-4xl mb-4 font-medium">
+        Your cart total is {{totalPrice}}
+      </div>
+
+      <button
+        pbutton=""
+        pripple=""
+        label="Check Out"
+        class="p-element p-ripple p-button p-component"
+      >
+        <span class="p-button-label">Check Out</span><span class="p-ink"></span>
+      </button>
+    </div>
+   
+    <ul class="list-none p-0 m-0"  *ngFor="let product of products">
+      <li
+        class="flex flex-column md:flex-row py-6 border-top-1 border-bottom-1 surface-border md:align-items-center"
+       
+        >
+        <img
+          src="assets/products/{{product.image}}"
+          class="w-12rem flex-shrink-0 mx-auto md:mx-0"
+        />
+        <div class="flex-auto py-5 md:pl-5">
+          <div
+            class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border pb-6"
+          >
+            <div class="w-full sm:w-6 flex flex-column">
+              <span class="text-900 text-xl font-medium mb-3">{{product.name}}</span
+              ><span class="text-600">{{product.category}}</span>
+            </div>
+            <div
+              class="w-full sm:w-6 flex align-items-start justify-content-between mt-3 sm:mt-0"
+            >
+              <!-- Increment and decrement -->
+
+              <p-inputNumber
+                #inputQuantity
+                [(ngModel)]="product.addedToCartQuantity"
+                [showButtons]="true"
+                buttonLayout="horizontal"
+                inputId="horizontal"
+                spinnerMode="horizontal"
+                [step]="1"
+                [max]="product.stock"
+                [min]="0"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+              ></p-inputNumber>
+
+              <div class="flex flex-column sm:align-items-end">
+                <span class="text-900 text-2xl font-medium mb-2 sm:mb-3"
+                  >${{product.price * product.addedToCartQuantity| number:'1.0-0'}}</span
+                ><a
+                  tabindex="0"
+                  class="cursor-pointer text-pink-500 font-medium hover:text-pink-600 transition-colors transition-duration-300"
+                  >Remove</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-column">
+            <span class="flex align-items-center"
+              ><i class="pi pi-exclamation-triangle text-600 mr-2"></i
+              ><span class="text-600">Only {{product.stock}} Available.</span></span
+            >
+          </div>
+        </div>
+      </li>
+      
+    </ul>
+    <div class="flex">
+      <div class="w-12rem hidden md:block"></div>
+      <ul class="list-none py-0 pr-0 pl-0 md:pl-5 mt-6 mx-0 mb-0 flex-auto">
+        <li class="flex justify-content-between mb-4">
+          <span class="text-xl text-900">Subtotal</span
+          ><span class="text-xl text-900">$82.00</span>
+        </li>
+        <li class="flex justify-content-between mb-4">
+          <span class="text-xl text-900">Shipping</span
+          ><span class="text-xl text-900">Free</span>
+        </li>
+        <li class="flex justify-content-between mb-4">
+          <span class="text-xl text-900">VAT</span
+          ><span class="text-xl text-900">$8.00</span>
+        </li>
+        <li
+          class="flex justify-content-between border-top-1 surface-border mb-4 pt-4"
+        >
+          <span class="text-xl text-900 font-bold text-3xl">Total</span
+          ><span class="text-xl text-900 font-bold text-3xl">$90.00</span>
+        </li>
+        <li class="flex justify-content-end">
+          <button
+            pbutton=""
+            pripple=""
+            label="Check Out"
+            class="p-element p-ripple p-button p-component"
+          >
+            <span class="p-button-label">Check Out</span
+            ><span class="p-ink"></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
