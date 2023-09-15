@@ -19,9 +19,12 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
-
-    'allowed_origins_patterns' => [],
+    'allowed_origins' => ['*'],
+    
+    'access_control_allow_headers' => ['*'],
+    'access_control_allow_methods' => ['*'],
+    'access_control_allow_origin' => ['*'],
+   'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 

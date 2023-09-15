@@ -4,29 +4,28 @@ import { Product } from '../api/product';
 
 @Injectable()
 export class ProductService {
-
+    private url = 'http://0.0.0.0:8080/products/';
     constructor(private http: HttpClient) { }
+    
 
-
-    getProducts() {
-        return this.http.get<any>('http://localhost:8080/products')
-            .toPromise()
-            .then(res => res.data as Product[])
-            .then(data => data);
+    async getProducts() {
+        const res = await this.http.get<any>(this.url)
+            .toPromise();
+        const data = res.data as Product[];
+        return data;
     }
     //TODO: Implement Create Product
     //TODO: Implement remove product
-    deleteProduct(id: number) {
-        return this.http.delete<any>('http://localhost:8080/products/' + id)
-            .toPromise()
-            .then(res => res.data as Product)
-            .then(data => data);
+    deleteProduct(id: number)  {
+        console.log('delete');
+        const _ = this.http.delete<any>(this.url + id ).toPromise();
+        console.log(_);
     }
-    updateProduct(product: Product) {
-        return this.http.patch<any>('http://localhost:8080/products/' + product.id, product)
-            .toPromise()
-            .then(res => res.data as Product)
-            .then(data => data);
+    async updateProduct(product: Product) {
+        const res = await this.http.patch<any>(this.url + `:${product.id}`, product)
+            .toPromise();
+        const data = res.data as Product;
+        return data;
     }
     //TODO: Implement update product
 }
