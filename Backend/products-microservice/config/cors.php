@@ -20,7 +20,6 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => ['*'],
-    
     'access_control_allow_headers' => ['*'],
     'access_control_allow_methods' => ['*'],
     'access_control_allow_origin' => ['*'],

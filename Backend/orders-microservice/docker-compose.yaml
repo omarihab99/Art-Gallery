@@ -1,0 +1,23 @@
+services:
+  main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: php artisan serve --host=0.0.0.0 --port=8002
+    volumes:
+      - .:/orders-microservice
+    ports:
+      - "8002:8002"
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    volumes:
+      - orders_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ordersdb
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "33064:3306"
+volumes:
+  orders_data:

@@ -23,7 +23,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'UI Components',
                 items: [
-                    { label: 'Table', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
+                    { label: 'Customers', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
                 ]
             },
             {
@@ -52,10 +52,15 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
-                        label: 'Crud',
+                        label: 'Products',
                         icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
+                        routerLink: ['/pages/products']
                     },
+                    {
+                        label: 'Orders',
+                        icon: 'pi pi-fw pi-pencil',
+                        routerLink: ['/pages/orders']
+                    }
                 ]
             },
            

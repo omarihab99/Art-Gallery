@@ -22,9 +22,19 @@ export class ProductService {
         console.log(_);
     }
     async updateProduct(product: Product) {
-        const res = await this.http.patch<any>(this.url + `:${product.id}`, product)
+        const res = await this.http.patch<any>(this.url + product.id, product)
             .toPromise();
         const data = res.data as Product;
+        console.log(data)
+        return data;
+    }
+    async createProduct(product: Product) {
+        const res = await this.http.post<any>(this.url, product)
+            .toPromise();
+        if(res.message) console.log(res.message);
+        console.log(res);
+        const data = res.product as Product;
+        console.log(data);
         return data;
     }
     //TODO: Implement update product

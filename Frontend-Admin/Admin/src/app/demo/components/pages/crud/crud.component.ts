@@ -39,13 +39,11 @@ export class CrudComponent implements OnInit {
             { field: 'product', header: 'Product' },
             { field: 'price', header: 'Price' },
             { field: 'category', header: 'Category' },
-            { field: 'rating', header: 'Reviews' },
-            { field: 'inventoryStatus', header: 'Status' }
+            { field: 'status', header: 'Status' }
         ];
 
         this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
+            { label: 'AVAILABLE', value: 'available' },
             { label: 'OUTOFSTOCK', value: 'outofstock' }
         ];
     }
@@ -73,6 +71,7 @@ export class CrudComponent implements OnInit {
     confirmDeleteSelected() {
         this.deleteProductsDialog = false;
         this.products = this.products.filter(val => !this.selectedProducts.includes(val));
+        this.productService.deleteProduct(this.product.id);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
         this.selectedProducts = [];
     }
@@ -96,44 +95,24 @@ export class CrudComponent implements OnInit {
         if (this.product.name?.trim()) {
             if (this.product.id) {
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
+                this.product.status = this.product.status.value ? this.product.status.value : this.product.status;
                 // this.products[this.findIndexById(this.product.id)] = this.product;
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+                this.productService.updateProduct(this.product);
             } else {
                 // this.product.id = this.createId();
                 this.product.image = 'product-placeholder.svg';
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
+                this.product.status = this.product.status ? this.product.status.value : 'AVAILABLE';
                 this.products.push(this.product);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
-
+            this.productService.createProduct(this.product);
             this.products = [...this.products];
             this.productDialog = false;
             this.product = {};
         }
     }
-
-    // findIndexById(id: string): number {
-    //     let index = -1;
-    //     for (let i = 0; i < this.products.length; i++) {
-    //         if (this.products[i].id === id) {
-    //             index = i;
-    //             break;
-    //         }
-    //     }
-
-    //     return index;
-    // }
-
-    // createId(): string {
-    //     let id = '';
-    //     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    //     for (let i = 0; i < 5; i++) {
-    //         id += chars.charAt(Math.floor(Math.random() * chars.length));
-    //     }
-    //     return id;
-    // }
 
     onGlobalFilter(table: Table, event: Event) {
         table.filterGlobal((event.target as HTMLInputElement).value, 'contains');

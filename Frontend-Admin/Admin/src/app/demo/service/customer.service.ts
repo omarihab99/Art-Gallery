@@ -4,27 +4,13 @@ import { Customer } from '../api/customer';
 
 @Injectable()
 export class CustomerService {
-
+    private url = 'http://0.0.0.0:8080/users/';
     constructor(private http: HttpClient) { }
 
-    getCustomersSmall() {
-        return this.http.get<any>('assets/demo/data/customers-small.json')
-            .toPromise()
-            .then(res => res.data as Customer[])
-            .then(data => data);
-    }
-
-    getCustomersMedium() {
-        return this.http.get<any>('assets/demo/data/customers-medium.json')
-            .toPromise()
-            .then(res => res.data as Customer[])
-            .then(data => data);
-    }
-
-    getCustomersLarge() {
-        return this.http.get<any>('assets/demo/data/customers-large.json')
-            .toPromise()
-            .then(res => res.data as Customer[])
-            .then(data => data);
-    }
+   async getCustomers(){
+       const res = await this.http.get<any>(this.url)
+            .toPromise();
+        const data = res.users as Customer[];
+        return data;
+   }
 }

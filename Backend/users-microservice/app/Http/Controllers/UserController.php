@@ -83,15 +83,12 @@ class UserController extends Controller
     public function index(){
         try {
             $users = User::all();
+            if(!$users){
+                return response()->json(['message' => 'No users found'], 404);
+            }
+            return response()->json(['users' => $users]);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage()], 500);
-
-        }
-       $users = User::all();
-      
-       if(!$users){
-           return response()->json(['message' => 'No users found'], 404);
-       }
-       return response()->json(['users' => $users]);
+        }      
     }
 }

@@ -18,3 +18,4 @@ Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::post('/products', [ProductController::class, 'create']);
 Route::patch('/products/{id}', [ProductController::class, 'update']);
 Route::delete('/products/{id}', [ProductController::class, 'delete']);
+Route::get('/products/info', [ProductController::class, 'info']);
