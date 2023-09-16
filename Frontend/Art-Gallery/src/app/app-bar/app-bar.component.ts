@@ -17,7 +17,6 @@ export class AppBarComponent implements OnInit {
   ngOnInit(): void {
     this.cartCountSubscription = this.cartService.getCartNumber$.subscribe(count => {
       this.cartCount = count;
-      console.log(count);
     });
     this.items = [
       {

@@ -13,7 +13,7 @@ export class OrderComponent {
   deleteProductsDialog: boolean = false;
 
   orders: Order[] = [];
-
+  orderStatusStyle: string = 'order-badge status-';
   order: Order = {};
 
 
@@ -52,6 +52,13 @@ export class OrderComponent {
 
 
   editProduct(order: Order) {
+    if (order.order_status === 'pending') {
+      order.order_status = 'delivered';
+    }
+    else {
+      order.order_status = 'pending';
+    }
+    this.orderService.updateOrder(order);
     this.order = { ...order };
     this.productDialog = true;
   }
@@ -70,13 +77,13 @@ export class OrderComponent {
   saveProduct() {
     this.submitted = true;
 
-      // @ts-ignore
-      this.order.order_status = this.order.order_status.value ? this.order.order_status.value : this.order.order_status;
-      this.orderService.updateOrder(this.order);
+    // @ts-ignore
+    this.order.order_status = this.order.order_status.value ? this.order.order_status.value : this.order.order_status;
+    this.orderService.updateOrder(this.order);
 
-      this.orders = [...this.orders];
-      this.productDialog = false;
-      this.order = {};
+    this.orders = [...this.orders];
+    this.productDialog = false;
+    this.order = {};
   }
 
 }

@@ -14,7 +14,8 @@ export class OrderService {
   }
   async updateOrder(order: Order) {
     const res = await this.http.patch<any>(this.url + order.id, order).toPromise();
-    const data = res.data as Order;
+    const data = res.order as Order;
+    console.log(data);
     return data;
   }
 }

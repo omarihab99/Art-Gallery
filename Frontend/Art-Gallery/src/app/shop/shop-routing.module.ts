@@ -9,7 +9,6 @@ const routes: Routes = [
   },{
     path:'product/:id',
     component: ProductComponent,
-    outlet:'product'
   }
 ];
 

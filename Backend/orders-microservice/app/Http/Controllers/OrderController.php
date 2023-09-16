@@ -83,9 +83,15 @@ class OrderController extends Controller
     //     }
     // }
 
-    public function update(Order $order, Request $request)
+    public function update(Request $request)
     {
-        $order->update($request->all());
+        $order = Order::find($request->id);
+        if(!$order){
+            return response()->json(['message' => 'Order not found'], 404);
+        }
+        Order::where('id', $request->id)->update([
+            'order_status' => $request->order_status
+        ]);
         return response()->json(['order' => $order]);
     }
 }

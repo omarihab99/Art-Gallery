@@ -59,8 +59,42 @@
           "sd": "static",
           "method": "POST",
           "host": [
-            "http://0.0.0.0:8000",
             "http://0.0.0.0:8001"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    
+    {
+      "endpoint": "/admins/login",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/admins/login",
+          "encoding": "json",
+          "sd": "static",
+          "method": "POST",
+          "host": [
+            "http://0.0.0.0:8004"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/admins/register",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/admins/register",
+          "encoding": "json",
+          "sd": "static",
+          "method": "POST",
+          "host": [
+            "http://0.0.0.0:8004"
           ],
           "disable_host_sanitize": false
         }

@@ -9,6 +9,10 @@ export class CartService {
   private cartCountSubject = new BehaviorSubject<number>(0);
   constructor() { }
   addToCart(product: Product) {
+    let found = this.cartItems.find(item => item.id === product.id);
+    if(found) {
+      return;
+    }
     this.cartItems.push(product);
     this.cartCountSubject.next(this.cartCountSubject.value + 1);
   }
@@ -17,5 +21,9 @@ export class CartService {
   }
   getCartItems() {
     return this.cartItems;
+  }
+  removeFromCart(product: Product) {
+    this.cartItems = this.cartItems.filter(item => item.id !== product.id);
+    this.cartCountSubject.next(this.cartCountSubject.value - 1);
   }
 }

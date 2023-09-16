@@ -16,7 +16,7 @@
 								<p-tag value="{{product.status.toUpperCase()}}" [rounded] = "true" severity="{{product.status === 'Out of Stock' ? 'danger' : 'success'}}"></p-tag>
 							</div>
 							<div class="flex flex-column align-items-center text-center mb-3">
-                                <a [routerLink]="['/product', product.id]">
+                                <a [routerLink]="['product', product.id]">
                                 <img [src]="'assets/products/' + product.image" [alt]="product.name" class="w-9 shadow-2 my-3 mx-0"/>
 
                                 </a>

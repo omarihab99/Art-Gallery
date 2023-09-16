@@ -16,6 +16,10 @@
                         <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
                         <th pSortableColumn="category">Total <p-sortIcon field="category"></p-sortIcon></th>
                         <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                        <th pSortableColumn="status">Customer Name <p-sortIcon field="status"></p-sortIcon></th>
+                        <th pSortableColumn="status">Customer Email <p-sortIcon field="status"></p-sortIcon></th>
+                        <th pSortableColumn="status">Customer Address <p-sortIcon field="status"></p-sortIcon></th>
+                        <th pSortableColumn="status">Customer Phone <p-sortIcon field="status"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -23,23 +27,39 @@
                     <tr>
                   
                         <td style="width:14%; min-width:10rem;"><span class="p-column-title">Code</span>
-                            {{product.code || product.id}}
+                            {{order.id}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Date</span>
-                            {{product.Date}}
+                            {{order.order_date}}
                         </td>
                       
                         <td style="width:14%; min-width:8rem;">
                             <span class="p-column-title">Total</span>
-                            {{product.order_total | currency:'USD'}}
+                            {{order.order_total | currency:'USD'}}
                         </td>
                         <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
-                            <span [class]="'product-badge status-' + (product.status ? product.status.toLowerCase().split(' ').join('') : '')">{{product.status}}</span>
+                            <span [class]="'product-badge status-' + (order.order_status ? order.order_status.toLowerCase().split(' ').join('') : '')" #orderStatus>{{order.order_status}}</span>
+                        </td>
+                        <td style="width:14%; min-width:8rem;">
+                            <span class="p-column-title">Customer Name</span>
+                            {{order.customer_name }}
+                        </td>
+                        <td style="width:14%; min-width:8rem;">
+                            <span class="p-column-title">Customer Email</span>
+                            {{order.customer_email }}
+                        </td>
+                        <td style="width:14%; min-width:8rem;">
+                            <span class="p-column-title">Customer Address</span>
+                            {{order.customer_address }}
+                        </td>
+                        <td style="width:14%; min-width:8rem;">
+                            <span class="p-column-title">Customer Phone</span>
+                            {{order.customer_phone }}
                         </td>
                         <td>
                             <div class="flex">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(order)"></button>
                             </div>
                         </td>
                     </tr>

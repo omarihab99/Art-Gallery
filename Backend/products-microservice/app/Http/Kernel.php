@@ -45,6 +45,9 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
+    protected $routeMiddleware = [
+        'jwt' => \App\Http\Middleware\JWTmiddleware::class,
+    ];
 
     /**
      * The application's middleware aliases.

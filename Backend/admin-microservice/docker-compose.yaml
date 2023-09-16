@@ -1,0 +1,23 @@
+services:
+  main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: php artisan serve --host=0.0.0.0 --port=8004
+    volumes:
+      - .:/admin-microservice
+    ports:
+      - "8004:8004"
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    volumes:
+      - admin_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: admindb
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "33065:3306"
+volumes:
+  admin_data:

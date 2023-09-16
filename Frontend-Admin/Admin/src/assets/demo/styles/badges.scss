@@ -7,6 +7,14 @@
     font-weight: 700;
     font-size: 12px;
     letter-spacing: .3px;
+    &.status-pending {
+        background: #23547B;
+        color: #fff;
+    }
+    &.status-delivered {
+        background: #1fd22b;
+        color: #fff;
+    }
 }
 
 .product-badge {
@@ -24,6 +32,7 @@
         background: #FEEDAF;
         color: #8A5340;
     }
+    
 }
 
 .customer-badge {

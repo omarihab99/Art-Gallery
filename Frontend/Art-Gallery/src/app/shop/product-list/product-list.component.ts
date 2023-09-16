@@ -23,9 +23,7 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductsService, private cartService: CartService, private messageService: MessageService) { }
   ngOnInit(): void {
     this.productService.getProducts().subscribe(res => {
-      console.log(res.hasOwnProperty('data'));
       this.products = Object.values(res)[0];
-      console.log(this.products);
     });
   }
   onSortChange(event: any) {

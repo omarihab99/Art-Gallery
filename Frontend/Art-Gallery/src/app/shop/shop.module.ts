@@ -7,6 +7,8 @@ import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { ProductComponent } from './product/product.component';
 import { MessagesModule } from 'primeng/messages';
+import { TabViewModule } from 'primeng/tabview';
+import { InputNumberModule } from 'primeng/inputnumber';
 @NgModule({
   declarations: [
     ProductListComponent,
@@ -19,6 +21,8 @@ import { MessagesModule } from 'primeng/messages';
     TagModule,
     ButtonModule,
     MessagesModule,
+    TabViewModule,
+    InputNumberModule
   ],
 
 })
