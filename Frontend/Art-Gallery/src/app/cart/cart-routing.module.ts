@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: '',
     component: ProductsCartComponent
+  },
+  {
+    path: 'order',
+    loadChildren: () => import('../order/order.module').then(m => m.OrderModule)
   }
 ];
 

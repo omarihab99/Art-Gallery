@@ -114,7 +114,15 @@ class ProductController extends Controller
     public function info(Request $request)
     {
         $productIds  = $request->json()->all();
-        $products = Product::whereIn('id', $productIds)->get();
+        $products = [];
+        foreach($productIds as $productId) {
+            $product = Product::find($productId);
+            print($product);
+            if (!$product) {
+                return response()->json(['message' => 'Product not found', 'id' => $productId], 404);
+            }
+            $products[] = $product;
+        }
         return response()->json(['products' => $products]);
     }
 }

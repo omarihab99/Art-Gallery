@@ -7,6 +7,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
+import { MessagesModule } from 'primeng/messages';
 @NgModule({
   declarations: [
     ProductsCartComponent
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     DropdownModule,
     ButtonModule,
     InputNumberModule,
-    FormsModule
+    FormsModule,
+    MessagesModule
   ]
 })
 export class CartModule { }

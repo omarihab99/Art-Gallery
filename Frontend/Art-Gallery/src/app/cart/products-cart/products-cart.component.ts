@@ -2,18 +2,21 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/product';
 import { OnInit } from '@angular/core';
 import { CartService } from 'src/app/cart.service';
-import { InputNumber } from 'primeng/inputnumber';
+import { Router } from '@angular/router';
+import { OrderService } from 'src/app/order.service';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-products-cart',
   templateUrl: './products-cart.component.html',
-  styleUrls: ['./products-cart.component.scss']
+  styleUrls: ['./products-cart.component.scss'],
+  providers: [MessageService]
 })
 export class ProductsCartComponent implements OnInit{
   products: Product[] = [];
   subTotal: number = 0;
   tax: number = 0;
   total: number=0;
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private router: Router, private orderService: OrderService, private messageService: MessageService) { }
   ngOnInit(): void {
     this.products = this.cartService.getCartItems();
     this.calculateSubtotal();
@@ -45,5 +48,15 @@ export class ProductsCartComponent implements OnInit{
     this.cartService.removeFromCart(product);
   }
 
+  checkout(){
+    this.orderService.createOrder(this.products, this.subTotal, this.tax, this.total);
+    if(!this.orderService.failed){
+      this.cartService.clearCart();
+      this.router.navigate(['/order']);
+    }
+    else{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Order Failed' });
+    }
+  }
 
 }

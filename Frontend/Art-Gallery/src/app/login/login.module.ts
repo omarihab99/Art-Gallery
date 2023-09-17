@@ -6,6 +6,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     LoginComponent
@@ -16,7 +17,8 @@ import { RippleModule } from 'primeng/ripple';
     CheckboxModule,
     ButtonModule,
     InputTextModule,
-    RippleModule
+    RippleModule,
+    FormsModule
   ]
 })
 export class LoginModule { }

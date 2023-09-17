@@ -48,40 +48,7 @@ class OrderController extends Controller
         $orders = Order::with('items')->get();
         return response()->json(['orders' => $orders]);
     }
-    // public function show(Request $request)
-    // {
-    //     try {
-    //         $orderId = $request->id;
-    //         $order = Order::find($orderId);
-    //         $productIdsArray = explode(',', $request->product_ids);
-
-    //         // Send a single HTTP request to fetch product information for all specified product IDs
-    //         $response = Http::get('https://other-microservice-url/api/products', [
-    //             'product_ids' => implode(',', $productIdsArray),
-    //         ]);
-
-    //         if ($response->successful()) {
-    //             $productInfoArray = $response->json();
-
-    //             // Retrieve the orders that include the specified products
-    //             $orders = Order::whereHas('items', function ($query) use ($productIdsArray) {
-    //                 $query->whereIn('product_id', $productIdsArray);
-    //             })->get();
-
-    //             // Return the product information and associated orders as JSON
-    //             return response()->json([
-    //                 'product_info' => $productInfoArray,
-    //                 'orders' => $orders,
-    //             ]);
-    //         } else {
-    //             // Handle the case where product info couldn't be retrieved from the other microservice
-    //             return response()->json(['error' => 'Product information not available'], 404);
-    //         }
-    //     } catch (\Throwable $th) {
-    //         //throw $th;
-    //         return response()->json(['message' => $th->getMessage()], 500);
-    //     }
-    // }
+   
 
     public function update(Request $request)
     {

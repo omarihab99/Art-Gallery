@@ -1,0 +1,32 @@
+<p-messages [enableService]="true" [closable]="true"></p-messages>
+
+<div class="surface-card p-8 shadow-2 border-round w-full lg:w-6 md:m-auto md:mt-4 sm:ml-2 sm:mr-2">
+    <div class="text-center mb-5">
+        <img src="assets/logo.png" alt="Image" height="50" class="mb-3">
+        <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
+
+    </div>
+
+    <div>
+        <label for="name1" class="block text-900 font-medium mb-2">Name</label>
+        <input id="name1" type="text" placeholder="Name" pInputText class="w-full mb-3" [(ngModel)]="name">
+
+        <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+        <input id="email1" type="email" placeholder="Email address" pInputText class="w-full mb-3" [(ngModel)]="email">
+
+        <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+        <input id="password1" type="password" placeholder="Password" pInputText class="w-full mb-3" [(ngModel)]="password">
+
+        <label for="password2" class="block text-900 font-medium mb-2">Password Confirm</label>
+        <input id="password2" type="password" placeholder="Password" pInputText class="w-full mb-3" [(ngModel)]="passwordConfirm">
+
+        <label for="phone1" class="block text-900 font-medium mb-2">Phone</label>
+        <p-inputMask id="phone1" mask="+20 9999 999 999"  placeholder="(+20) 1000 000 000" [(ngModel)]="phone"></p-inputMask>
+        <label for="address1" class="block text-900 font-medium mb-2">Address</label>
+        <textarea id="address1" rows="5" cols="45" pInputTextarea [(ngModel)]="address"></textarea>
+        <div class="flex align-items-center justify-content-between mb-6">
+      
+
+        <button pButton pRipple label="Sign up" icon="pi pi-user" class="w-full" (click)="validateInput()"></button>
+    </div>
+</div>

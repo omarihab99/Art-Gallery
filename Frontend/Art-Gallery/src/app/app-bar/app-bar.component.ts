@@ -40,9 +40,22 @@ export class AppBarComponent implements OnInit {
     this.cartCountSubscription.unsubscribe();
   }
   goToCart() {
-    this.router.navigate(['/cart']);
+    if(localStorage.getItem('token')){
+      this.router.navigate(['/cart']);
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
   }
   goToShop() {
-    this.router.navigate(['/shop']);
+    if(localStorage.getItem('token')){
+      this.router.navigate(['/shop']);
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
+  }
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }

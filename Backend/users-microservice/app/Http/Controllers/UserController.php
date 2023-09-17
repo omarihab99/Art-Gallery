@@ -34,7 +34,7 @@ class UserController extends Controller
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'invalid_credentials'], 400);
         }
-        return response()->json(compact('token'));
+        return response()->json(['token' => $token, 'user' => auth()->user()], 200);
     }
     /**
      * Register a new user.
@@ -44,41 +44,45 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse The response containing a success message and token.
      */
     public function register(Request $request){
-
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:8|confirmed|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required|regex:/^[\d()+\-.\s]*$/',
-        ],[
-            'email.required' => 'Email is required',
-            'password.required' => 'Password is required',
-            'name.required' => 'Name is required',
-            'address.required' => 'Address is required',
-            'phone.required' => 'Phone is required',
-            'phone.numeric' => 'Phone must be numeric',
-            'phone.digits' => 'Phone must be 11 digits',
-            'password.min' => 'Password must be at least 8 characters',
-            'password.confirmed' => 'Password confirmation does not match',
-            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
-
-        ]);
-        print($validator->errors());
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required|string|min:8|confirmed|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'name' => 'required',
+                'address' => 'required',
+                'phone' => 'required|regex:/^[\d()+\-.\s]*$/',
+            ],[
+                'email.required' => 'Email is required',
+                'password.required' => 'Password is required',
+                'name.required' => 'Name is required',
+                'address.required' => 'Address is required',
+                'phone.required' => 'Phone is required',
+                'phone.numeric' => 'Phone must be numeric',
+                'phone.digits' => 'Phone must be 11 digits',
+                'password.min' => 'Password must be at least 8 characters',
+                'password.confirmed' => 'Password confirmation does not match',
+                'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
+    
+            ]);
+            if($validator->fails()){
+                return response()->json($validator->errors(), 400);
+            }
+    
+            $user = new User([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'address' => $request->address,
+                'phone' => $request->phone
+            ]);
+            $user->save();
+            $token = JWTAuth::fromUser($user);
+            return response()->json(['token' => $token], 201);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['message' => $th->getMessage()], 500);
         }
-
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'address' => $request->address,
-            'phone' => $request->phone
-        ]);
-        $user->save();
-        $token = JWTAuth::fromUser($user);
-        return response()->json(['message' => 'User created successfully', 'token' => $token], 201);
+        
     }
     public function index(){
         try {
